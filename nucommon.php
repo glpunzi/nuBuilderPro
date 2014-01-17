@@ -402,14 +402,6 @@ function nuHashData(){
 		
 	}
 
-
-//    for($i = 0 ; $i < count($form_data['data'][0]['records'][0]['fields']) ; $i++){               //-- add hash variables from calling edit page
-//    
-//        $fd                    = $form_data['data'][0]['records'][0]['fields'][$i];
-//        $h[$fd['field']]       = $fd['value'];
-//        
-//    }
-
     $recordData                = nuRecordArray($h);                    //-- record data
     $sessionData               = nuSessionArray(nuV('session_id'));  //-- user and access info
 
@@ -1101,9 +1093,10 @@ function nuPDForPHPParameters($data, $hashData) {
         if (nuErrorFound()) {
             return;
         }
+
         $r = db_fetch_object($t);
         if(!nuPHPAccess($r->zzzsys_php_id)){
-            nuDisplayError("Access denied to PHP - ($r->slp_code)");
+            nuDisplayError("Access denied to PHP - ($theID)");
             return;
         }
 
@@ -1124,7 +1117,7 @@ function nuPDForPHPParameters($data, $hashData) {
 
         if(!nuReportAccess($r->zzzsys_report_id)){
 
-		nuDisplayError("Access denied to Report - ($r->sre_code)");
+		nuDisplayError("Access denied to Report - ($theID)");
             return;
         }
         

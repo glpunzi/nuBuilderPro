@@ -1508,24 +1508,25 @@ function nuEmailAttachment(pCode, pEmailTo, pAction, pSubject, pMessage, pCallTy
         w.session_id         = window.nuSession.setSessionID;
         nuSession.nuWindows.push(w);
 
-	var P              = new nuCopyJSObject(nuFORM);
-        P.call_type        = call_type;
-        P.parent_record_id = pCode;
-        P.form_data        = nuGetData();
-
+	var P                    = new nuCopyJSObject(nuFORM);
+        P.call_type          = call_type;
+        P.parent_record_id   = pCode;
+        P.form_data          = nuGetData();
+		
         var request = $.ajax({
                 url      : "nuapi.php",
                 type     : "POST",
                 data     : {nuWindow : P},
-                async    : false,
+                async    : true,
                 success  : function(data) {
-                    var obj     = $.parseJSON(data.DATA);
-                    var url     = 'nuemailcreate.php?i='+w.id+'&uname='+window.nu_user_name+'&debug='+obj.id+action+emailTo+emailSubject+emailMessage+emailFileName+emailCallType;
+					if(nuErrorMessage(data.ERRORS)){return;}
+                    var obj  = $.parseJSON(data.DATA);
+                    var url  = 'nuemailcreate.php?i='+w.id+'&uname='+window.nu_user_name+'&debug='+obj.id+action+emailTo+emailSubject+emailMessage+emailFileName+emailCallType;
                     nuCustomIframeWindow(url,'nuEmailPopUp','650px','460px');
                 },
                 dataType : "json"
                 }).done(function(data){
-                        if(nuErrorMessage(data.ERRORS)){return;}
+//					if(nuErrorMessage(data.ERRORS)){return;}
         	});
 }
 

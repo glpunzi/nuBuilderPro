@@ -21,7 +21,7 @@ foreach ($_FILES as $key){                          //-- loop through uploaded f
 	$error     = $key['error'];
 	$size      = $key['size'];
 
-	$J[]       = " { |name| : |$name|,  |type| : |$type|,  |error| : |$error|,  |size| : |$size| }" ;
+	$J[]       = "{ |name| : |$name|,  |type| : |$type|,  |error| : |$error|,  |size| : |$size| }" ;
 
 }
 
