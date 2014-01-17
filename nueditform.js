@@ -47,12 +47,14 @@ function nuBuildEditForm(o){
 	e.setAttribute('id', 'poweredBy');
 	e.setAttribute('onclick', 'nuPoweredBy(this)');
 	$($('#nuStatusHolder')).append(e);
-	$('#' + e.id).css( 'width', '400px');
-	$('#' + e.id).css( 'text-align', 'right');
-	$('#' + e.id).css( 'top', '3px');
-	$('#' + e.id).css( 'left', (o.form_width - 405) +'px');
-	$('#' + e.id).css( 'position', 'absolute');
-	$('#' + e.id).html( o.nu_user_name + "<span style='font-weight:bold'> :: </span> "+nuTranslate('Powered By')+' nuBuilder');
+	$('#' + e.id).css({
+        'width'     : '400px',
+        'text-align': 'right',
+        'top'       : '3px',
+        'left'      : (o.form_width - 405) +'px',
+        'position'  : 'absolute'  
+    })
+    .html( o.nu_user_name + "<span style='font-weight:bold'> :: </span> "+nuTranslate('Powered By')+' nuBuilder');
         
 	$('#nuTabArea').css('width', o.form_width);
 	$('#nuShadeHolder').css('height', o.form_height);
@@ -130,9 +132,11 @@ function nuBuildHolder(pid, pclass, pparent){
 function nuObjectSize(o,e,i,xAndY){
 
 	if(o[i].display == '0'){
-		$('#' + e.id).css( 'height', '0px')
-		$('#' + e.id).css( 'width', '0px')
-		$('#' + e.id).css( 'visibility', 'hidden')
+		$('#' + e.id).css({
+            'height'    : '0px',
+            'width'     : '0px',
+            'visibility': 'hidden'
+        })
 		e.setAttribute('tabindex',          '10000');
 	}
 
@@ -246,19 +250,21 @@ function nuSubformColumnTitles(o,i,e,objects){
 	c.setAttribute('id', 'status_title_'+o[i].field);
 	$('#' + e.id).append(c);
 	width      = parseInt(o[i].width);
-	$('#' + c.id).css( 'width', (width-40)+'px');
-	$('#' + c.id).css( 'height', (o[i].title_height) +'px');
-	$('#' + c.id).css( 'top', '0px');
-	$('#' + c.id).css( 'left', left+'px');
-	$('#' + c.id).css( 'position', 'absolute');
-	$('#' + c.id).css( 'border-color', 'grey');
-	$('#' + c.id).css( 'border-width', '1px');
-	$('#' + c.id).css( 'border-style', 'solid');
-	$('#' + c.id).css( '-moz-border-top-left-radius', '5px');
-	$('#' + c.id).css( 'border-top-left-radius', '5px');
-	$('#' + c.id).css( '-moz-border-top-right-radius', '5px');
-	$('#' + c.id).css( 'border-top-right-radius', '5px');
-	$('#' + c.id).addClass('nuUnselectedTab nuGradient');
+	$('#' + c.id).css({ 
+        'width'                       : (width-40)+'px',
+        'height'                      : (o[i].title_height) +'px',
+        'top'                         : '0px',
+        'left'                        : left+'px',
+        'position'                    : 'absolute',
+        'border-color'                : 'grey',
+        'border-width'                : '1px',
+        'border-style'                : 'solid',
+        '-moz-border-top-left-radius' : '5px',
+        'border-top-left-radius'      : '5px',
+        '-moz-border-top-right-radius': '5px',
+        'border-top-right-radius'     : '5px'
+    })
+	.addClass('nuUnselectedTab nuGradient');
 	
 	if(o[i].row_type == 'g'){
 	
@@ -270,20 +276,26 @@ function nuSubformColumnTitles(o,i,e,objects){
 			c.setAttribute('ondblclick', 'nuOpenObjectForm(this)');
 			$('#' + e.id).append(c);
 			width      = parseInt(objects[I].width)+(parseInt(objects[I].width) == 0 ? 0 : 4);
-			$('#' + c.id).css( 'width', width+'px');
-			$('#' + c.id).css( 'height', (o[i].title_height) +'px');
-			$('#' + c.id).css( 'top', '0px');
-			$('#' + c.id).css( 'left', left+'px');
-			$('#' + c.id).css( 'position', 'absolute');
-			$('#' + c.id).css( 'border-color', 'grey');
-			$('#' + c.id).css( 'border-width', '1px');
-			$('#' + c.id).css( 'border-style', 'solid');
+			$('#' + c.id).css({ 
+                'width'       : width+'px',
+                'height'      : (o[i].title_height) +'px',
+                'top'         : '0px',
+                'left'        : left+'px',
+                'position'    : 'absolute',
+                'border-color': 'grey',
+                'border-width': '1px',
+                'border-style': 'solid'
+            })
+            .addClass('nuUnselectedTab nuGradient')
+			.html(objects[I].title);
+            
 			if(I == 1){
-				$('#' + c.id).css( '-moz-border-top-left-radius', '5px');
-				$('#' + c.id).css( 'border-top-left-radius', '5px');
+				$('#' + c.id).css({ 
+                    '-moz-border-top-left-radius' : '5px',
+                    'border-top-left-radius'      : '5px'
+                })
 			}
-			$('#' + c.id).addClass('nuUnselectedTab nuGradient');
-			$('#' + c.id).html(objects[I].title);
+			
 			left = left + width;
 
 		}
@@ -292,19 +304,21 @@ function nuSubformColumnTitles(o,i,e,objects){
 	c = document.createElement('div');              //-- create a new subform column div
 	c.setAttribute('id', 'title_delete'+o[i].field);
 	$('#' + e.id).append(c);
-	$('#' + c.id).css( 'width', '40px');
-	$('#' + c.id).css( 'height', (o[i].title_height) +'px');
-	$('#' + c.id).css( 'top', '0px');
-	$('#' + c.id).css( 'left', (o[i].width-60)+'px');
-	$('#' + c.id).css( 'position', 'absolute');
-	$('#' + c.id).css( 'border-color', 'grey');
-	$('#' + c.id).css( 'border-width', '1px');
-	$('#' + c.id).css( 'border-style', 'solid');
-	$('#' + c.id).css( 'font-size', '12px');
-	$('#' + c.id).css( '-moz-border-top-right-radius', '5px');
-	$('#' + c.id).css( 'border-top-right-radius', '5px');
-	$('#' + c.id).addClass('nuUnselectedTab nuGradient');
-	$('#' + c.id).html('Delete');
+	$('#' + c.id).css({ 
+        'width'                       : '40px',
+        'height'                      : (o[i].title_height) +'px',
+        'top'                         : '0px',
+        'left'                        : (o[i].width-60)+'px',
+        'position'                    : 'absolute',
+        'border-color'                : 'grey',
+        'border-width'                : '1px',
+        'border-style'                : 'solid',
+        'font-size'                   : '12px',
+        '-moz-border-top-right-radius': '5px',
+        'border-top-right-radius'     : '5px'
+    })
+	.addClass('nuUnselectedTab nuGradient')
+	.html('Delete');
 
 }
 
@@ -337,68 +351,80 @@ function nuPagingStatus(parent,top,left,page,total){
 	e = document.createElement('div');              //-- create a new paging object
 	e.setAttribute('id', 'paging_'+parent);
 	$('#' + parent).append(e);
-	$('#' + e.id).css( 'width', '190px');
-	$('#' + e.id).css( 'height', '18px');
-	$('#' + e.id).css( 'text-align', 'right');
-	$('#' + e.id).css( 'top', top+'px');
-	$('#' + e.id).css( 'left', left+'px');
-	$('#' + e.id).css( 'position', 'absolute');
-	$('#' + e.id).addClass('nuUnselectedTab');
+	$('#' + e.id).css({ 
+        'width'      : '190px',
+        'height'     : '18px',
+        'text-align' : 'right',
+        'top'        : top+'px',
+        'left'       : left+'px',
+        'position'   : 'absolute'
+    })
+	.addClass('nuUnselectedTab');
 
 	lt = document.createElement('div');              //-- create a less than object
 	lt.setAttribute('id', 'paging_previous_'+parent);
 	$('#' + e.id).append(lt);
-	$('#' + lt.id).css( 'top', '0px');
-	$('#' + lt.id).css( 'left', '0px');
-	$('#' + lt.id).css( 'position', 'absolute');
-	$('#' + lt.id).css( 'font-weight', 'bold');
-	$('#' + lt.id).css( 'font-size', '12px');
-	$('#' + lt.id).html('&lt;');
-	$('#' + lt.id).addClass('nuUnselectedTab');
+	$('#' + lt.id).css({ 
+        'top'         : '0px',
+         'left'       : '0px',
+         'position'   : 'absolute',
+         'font-weight': 'bold',
+         'font-size'  : '12px'
+    })
+	.html('&lt;')
+	.addClass('nuUnselectedTab');
 
 	ltt = document.createElement('div');              //-- create a less than text object
 	ltt.setAttribute('id', 'paging_previous_text_'+parent);
 	$('#' + e.id).append(ltt);
-	$('#' + ltt.id).css( 'top', '0px');
-	$('#' + ltt.id).css( 'left', '30px');
-	$('#' + ltt.id).css( 'position', 'absolute');
-	$('#' + ltt.id).css( 'font-size', '12px');
-	$('#' + ltt.id).html('Page');
-	$('#' + ltt.id).addClass('nuUnselectedTab');
+	$('#' + ltt.id).css({ 
+        'top'      : '0px',
+        'left'     : '30px',
+        'position' : 'absolute',
+        'font-size': '12px'
+    })
+	.html('Page')
+	.addClass('nuUnselectedTab');
 
 	ip = document.createElement('input');              //-- create a current page object
 	ip.setAttribute('id', 'paging_current_'+parent);
 	$('#' + e.id).append(ip);
-	$('#' + ip.id).css( 'height', '12px');
-	$('#' + ip.id).css( 'top', '0px');
-	$('#' + ip.id).css( 'left', '70px');
-	$('#' + ip.id).css( 'position', 'absolute');
-	$('#' + ip.id).css( 'width', '30px');
-	$('#' + ip.id).css( 'font-size', '12px');
-	$('#' + ip.id).val(page);
-	$('#' + ip.id).css( 'text-align', 'center');
-	$('#' + ip.id).css( 'background-color', 'white');
-
+	$('#' + ip.id).css({ 
+        'height'          : '12px',
+        'top'             : '0px',
+        'left'            : '70px',
+        'position'        : 'absolute',
+        'width'           : '30px',
+        'font-size'       : '12px',	
+        'text-align'      : 'center',
+        'background-color': 'white'
+    })
+    .val(page);
+    
 	gtt = document.createElement('div');              //-- create a greater than text object
 	gtt.setAttribute('id', 'paging_next_text'+parent);
 	$('#' + e.id).append(gtt);
-	$('#' + gtt.id).css( 'top', '0px');
-	$('#' + gtt.id).css( 'left', '110px');
-	$('#' + gtt.id).css( 'position', 'absolute');
-	$('#' + gtt.id).css( 'font-size', '12px');
-	$('#' + gtt.id).html('/&nbsp;'+total);
-	$('#' + gtt.id).addClass('nuUnselectedTab');
+	$('#' + gtt.id).css({ 
+        'top'      : '0px',
+        'left'     : '110px',
+        'position' : 'absolute',
+        'font-size': '12px'
+    })
+	.html('/&nbsp;'+total)
+	.addClass('nuUnselectedTab');
 
 	gt = document.createElement('div');              //-- create a greater than object
 	gt.setAttribute('id', 'paging_next_'+parent);
 	$('#' + e.id).append(gt);
-	$('#' + gt.id).css( 'top', '0px');
-	$('#' + gt.id).css( 'left', '150px');
-	$('#' + gt.id).css( 'position', 'absolute');
-	$('#' + gt.id).css( 'font-weight', 'bold');
-	$('#' + gt.id).css( 'font-size', '12px');
-	$('#' + gt.id).html('&gt;');
-	$('#' + gt.id).addClass('nuUnselectedTab');
+	$('#' + gt.id).css({ 
+        'top'        : '0px',
+        'left'       : '150px',
+        'position'   : 'absolute',
+        'font-weight': 'bold',
+        'font-size'  : '12px'
+    })
+	.html('&gt;')
+	.addClass('nuUnselectedTab');
 
 	
 }
@@ -441,12 +467,13 @@ function nuiFrame(id,tab,u,t,l,h,w){
     e.setAttribute('id',  id);
     e.setAttribute('src', u);
     $('#nu_tab_area'+ tab).append(e);
-    $('#' + e.id).css( 'width',  w  + 'px');
-    $('#' + e.id).css( 'height', h + 'px');
-    $('#' + e.id).css( 'top',    t + 'px');
-    $('#' + e.id).css( 'left',   l + 'px');
-    $('#' + e.id).css( 'position', 'absolute');
-
+    $('#' + e.id).css({ 
+        'width'    :  w  + 'px',
+        'height'   :  h + 'px',
+        'top'      :  t + 'px',
+        'left'     :  l + 'px',
+        'position' :  'absolute'
+    });
 
 }
 
@@ -468,8 +495,7 @@ function nuRecordObjects(formType, formTop){
 
 
 	this.nuBuildHtml = function(o,i,p){
-
-		var e          = document.createElement('div');       //-- create a new html object
+        var e          = document.createElement('div');       //-- create a new html object
 
 		this.nuObjectWrapper(o,i,p);
 		this.nuSetAttributes(e,o,i);
@@ -583,14 +609,17 @@ function nuRecordObjects(formType, formTop){
 		nuSetLookupAttributes(e,c,img,d,o,i,this.prefix, this.rowPK);
 
 		$('#'+'td_right_'+e.id).append(c,img,d,e);
-		$('#' + e.id).css( 'visibility', 'hidden');
-		$('#' + e.id).css( 'width', '0px');
+		$('#' + e.id).css({ 
+            'visibility' : 'hidden',
+            'width'      : '0px'
+        });
+        
 		$('#' + c.id).css( 'width', c_width+'px');
 		
 		if ( o[i].read_only == '1' ) {
-                        $('#' + c.id).addClass('nuReadOnly');
-                } else {
-                	$('#' + c.id).addClass('nuLookup');
+            $('#' + c.id).addClass('nuReadOnly');
+        } else {
+            $('#' + c.id).addClass('nuLookup');
 		}
 
 		if(c_width == '0'){
@@ -599,14 +628,17 @@ function nuRecordObjects(formType, formTop){
 		if(d_width == '0'){
 			$('#' + d.id).css( 'visibility', 'hidden');
 		}
-		$('#' + d.id).css( 'width', d_width+'px');
-		$('#' + d.id).addClass('nuReadOnly');
+        
+		$('#' + d.id).css( 'width', d_width+'px')
+        .addClass('nuReadOnly');
 
-		$('#' + img.id).css( 'vertical-align', 'text-bottom');
-                $('#' + img.id).css( 'width',  '17px');
-	        $('#' + img.id).css( 'height', '17px');
-        	$('#' + img.id).addClass('nuClose');
-        	$('#' + img.id).html('&#10138;');
+		$('#' + img.id).css({ 
+            'vertical-align': 'text-bottom',
+            'width'         : '17px',
+            'height'        : '17px'
+        })
+        .addClass('nuClose')
+        .html('&#10138;');
 
 		if(o[i].display != '1') {
                 	$('#' + img.id).css(  'visibility', 'hidden');
@@ -626,9 +658,10 @@ function nuRecordObjects(formType, formTop){
 
 		$('#'+'td_right_'+e.id).append(e);
 		nuObjectSize(o,e,i,true);
-		$('#' + e.id).css( 'text-align', nuFormatAlign(o[i].align));
-		$('#' + e.id).attr( 'wrap', 'on');
-		$('#' + e.id).val(o[i].value);
+		$('#' + e.id).css( 'text-align', nuFormatAlign(o[i].align))
+		.attr( 'wrap', 'on')
+		.val(o[i].value);
+        
 		 if ( o[i].read_only == '1' ) {
                         $('#' + e.id).addClass('nuReadOnly');
                 }
@@ -687,11 +720,14 @@ function nuRecordObjects(formType, formTop){
 		e.setAttribute('id',   'nu_holder_'+this.prefix+o[i].field);
 		e.setAttribute('data-id'    , o[i].field);
 		$('#'+ p).append(e);
-		$('#' + e.id).css( 'top',    o[i].top + 'px');
-		$('#' + e.id).css( 'left',   o[i].left + 'px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'border-style', 'none');
-		$('#' + e.id).addClass('nuSelectedTab');
+		
+        $('#' + e.id).css({ 
+            'top'          : o[i].top + 'px',
+            'left'         : o[i].left + 'px',
+            'position'     : 'absolute',
+            'border-style' : 'none'
+        })
+		.addClass('nuSelectedTab');
 		
 
 		p              = e.id;
@@ -701,13 +737,15 @@ function nuRecordObjects(formType, formTop){
 		e.setAttribute('data-id', o[i].o_id);
 		e.setAttribute('ondblclick', 'nuOpenObjectForm(this)');
 		$('#'+ p).append(e);
-		$('#' + e.id).css( 'width',  o[i].width  + 'px');
-		$('#' + e.id).css( 'height', o[i].height + 'px');
-		$('#' + e.id).css( 'top',    '4px');
-		$('#' + e.id).css( 'left',   '0px');
-		$('#' + e.id).css( 'text-align',   'left');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).html(o[i].title);
+		$('#' + e.id).css( {
+            'width'      :  o[i].width  + 'px',
+            'height'     : o[i].height + 'px',
+            'top'        :    '4px',
+            'left'       :   '0px',
+            'text-align' :   'left',
+            'position'   : 'absolute'
+        })
+		.html(o[i].title);
 
 
 		$('#' + e.id).hover(
@@ -726,11 +764,13 @@ function nuRecordObjects(formType, formTop){
 		e.setAttribute('id',  this.prefix+o[i].field);
 		e.setAttribute('src', 'index.php?i=' + w.id);
 		$('#'+ p).append(e);
-		$('#' + e.id).css( 'width',  o[i].width  + 'px');
-		$('#' + e.id).css( 'height', o[i].height + 'px');
-		$('#' + e.id).css( 'top',    title       + 'px');
-		$('#' + e.id).css( 'left',   0           + 'px');
-		$('#' + e.id).css( 'position', 'absolute');
+		$('#' + e.id).css({ 
+            'width'    :  o[i].width  + 'px',
+            'height'   : o[i].height + 'px',
+            'top'      :    title       + 'px',
+            'left'     :   0           + 'px',
+            'position' : 'absolute'
+        });
 
 	}
 
@@ -858,11 +898,13 @@ function nuRecordObjects(formType, formTop){
 		e.setAttribute('id', 'nu_holder_'+this.prefix+o[i].field);
 		e.setAttribute('data-id',     o[i].o_id);
 		$('#' + parent).append(e);
-		$('#' + e.id).css( 'top', o[i].top + 'px');
-		$('#' + e.id).css( 'left', o[i].left + 'px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'border-style', 'none');
-		$('#' + e.id).addClass('nuSelectedTab');
+		$('#' + e.id).css({ 
+            'top'          : o[i].top + 'px',
+            'left'         : o[i].left + 'px',
+            'position'     : 'absolute',
+            'border-style' : 'none'
+        })
+		.addClass('nuSelectedTab');
 
 		parent    = e.id;
 
@@ -871,13 +913,15 @@ function nuRecordObjects(formType, formTop){
 		e.setAttribute('data-id', o[i].o_id);
 		e.setAttribute('ondblclick', 'nuOpenObjectForm(this)');
 		$('#'+ parent).append(e);
-		$('#' + e.id).css( 'width',  o[i].width  + 'px');
-		$('#' + e.id).css( 'height', o[i].height + 'px');
-		$('#' + e.id).css( 'top',    '0px');
-		$('#' + e.id).css( 'left',   '0px');
-		$('#' + e.id).css( 'text-align',   'left');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).html(o[i].title);
+		$('#' + e.id).css({ 
+            'width'      : o[i].width  + 'px',
+            'height'     : o[i].height + 'px',
+            'top'        : '0px',
+            'left'       : '0px',
+            'text-align' : 'left',
+            'position'   : 'absolute'
+        })
+		.html(o[i].title);
 
 
 
@@ -899,16 +943,17 @@ function nuRecordObjects(formType, formTop){
 		$('#' + parent).append(e);
 		width      = parseInt(o[i].width);
 		height     = parseInt(o[i].height);
-		$('#' + e.id).css( 'width',  (width-30)  +'px');
-		$('#' + e.id).css( 'height', height +'px');
-		$('#' + e.id).css( 'top', '20px');
-		$('#' + e.id).css( 'left', '0px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', '#E0E0E0');
-		$('#' + e.id).css( '-moz-border-top-left-radius', '5px');
-		$('#' + e.id).css( 'border-top-left-radius', '5px');
-		$('#' + e.id).css( 'box-shadow', '15px 5px 5px #888888');
-
+		$('#' + e.id).css({ 
+            'width'                        :  (width-30)  +'px',
+             'height'                      : height +'px',
+             'top'                         : '20px',
+             'left'                        : '0px',
+             'position'                    : 'absolute',
+             'background-color'            : '#E0E0E0',
+             '-moz-border-top-left-radius' : '5px',
+             'border-top-left-radius'      : '5px',
+            'box-shadow'                   : '15px 5px 5px #888888'
+        });
 		parent  = e.id;
 		
 		nuSubformColumnTitles(o,i,e,sfObjects);
@@ -917,12 +962,14 @@ function nuRecordObjects(formType, formTop){
 		$('#' + parent).append(e);
 		width      = parseInt(o[i].width);
 		height     = parseInt(o[i].height);
-		$('#' + e.id).css( 'width', (o[i].width-20)+'px');
-		$('#' + e.id).css( 'height', (height-(o[i].title_height)) +'px');
-		$('#' + e.id).css( 'top', (Number(o[i].title_height)+2)+'px');
-		$('#' + e.id).css( 'left', '0px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'overflow', 'scroll');
+		$('#' + e.id).css({
+            'width'    : (o[i].width-20)+'px',
+            'height'   : (height-(o[i].title_height)) +'px',
+            'top'      : (Number(o[i].title_height)+2)+'px',
+            'left'     : '0px',
+            'position' : 'absolute',
+            'overflow' : 'scroll'
+        });
 
 		parent  = e.id;
 		var row_height  = nuGetGridRowHeight(o,i,sfObjects);
@@ -1036,12 +1083,14 @@ function nuDisplayEditForm(formObjects,formRecords,formParent,sfI,sfO){
                     e.setAttribute('data-addable', 'no');
                 }
 				$('#' + formParent).append(e);
-				$('#' + e.id).css( 'top', form.top+'px');
-				$('#' + e.id).css( 'width', (formWidth-40)+'px');
-				$('#' + e.id).css( 'left', '0px');
-				$('#' + e.id).css( 'height', formHeight+'px');
-				$('#' + e.id).css( 'position', 'absolute');
-				$('#' + e.id).css( 'border-style', 'none');
+				$('#' + e.id).css({ 
+                    'top'          : form.top+'px',
+                    'width'        : (formWidth-40)+'px',
+                    'left'         : '0px',
+                    'height'       : formHeight+'px',
+                    'position'     : 'absolute',
+                    'border-style' : 'none'
+                });
 				
 				parent = e.id;
 				e         = document.createElement('table');       //-- create a new table
@@ -1074,13 +1123,15 @@ function nuDisplayEditForm(formObjects,formRecords,formParent,sfI,sfO){
                                     e.setAttribute('data-addable', 'no');
                                 }
 				$('#' + formParent).append(e);
-				$('#' + e.id).css( 'top', form.top+'px');
-				$('#' + e.id).css( 'width', (formWidth-40)+'px');
-				$('#' + e.id).css( 'left', '0px');
-				$('#' + e.id).css( 'height', formHeight+'px');
-				$('#' + e.id).css( 'position', 'absolute');
-				$('#' + e.id).css( 'border-style', 'none');
-				$('#' + e.id).css( 'text-align', 'left');
+				$('#' + e.id).css({
+                    'top'          : form.top+'px',
+                    'width'        : (formWidth-40)+'px',
+                    'left'         : '0px',
+                    'height'       : formHeight+'px',
+                    'position'     : 'absolute',
+                    'border-style' : 'none',
+                    'text-align'   : 'left'
+                });
 
 				parent = e.id;
 			}

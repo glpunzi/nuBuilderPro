@@ -2,7 +2,6 @@
 
 require_once('config.php'); 
 
-//session_destroy();
 session_start();
 
 $_SESSION['DBHost']                 = $nuConfigDBHost;
@@ -492,7 +491,9 @@ function nuReplaceHashes($str, $arr){
 
 	while(list($key, $value) = each($arr)){
 		$newValue = str_replace("'","\'",$value);
-		$str = str_replace('#'.$key.'#', $newValue, $str);
+		if($value != '' and $str != '' and $key != ''){
+			$str = str_replace('#'.$key.'#', $newValue, $str);
+		}
 	}
 
     $GLOBALS['latest_hashData'] = $arr;
@@ -1123,7 +1124,7 @@ function nuPDForPHPParameters($data, $hashData) {
 
         if(!nuReportAccess($r->zzzsys_report_id)){
 
-		nuDisplayError("Access denied to Report - ($r->slr_code)");
+		nuDisplayError("Access denied to Report - ($r->sre_code)");
             return;
         }
         
@@ -1180,7 +1181,7 @@ function nuCreateFile($c){
     $r    = db_fetch_object($t);
     $x    = explode('/',$r->sfi_type);
     $id   = nuID();
-    $file = "temp/$id." . $x[1];
+    $file = "tmp/$id." . $x[1];
     $h    = fopen($file , 'w');
     fwrite($h, $r->sfi_blob);
     fclose($h);
@@ -1446,14 +1447,42 @@ function nuClearDebug(){                                                 //-- re
 
 function nuPHPAccess($i){
 
-	return true;
+	$a = $GLOBALS['hashData']['nu_access_level'];
+
+	if($a == 'globeadmin'){return true;}
+
+	$s = "SELECT count(*) FROM zzzsys_access_level_php
+		   INNER JOIN zzzsys_access_level ON slp_zzzsys_access_level_id = zzzsys_access_level_id
+		   WHERE slp_zzzsys_php_id = ?
+		   AND sal_code = ?
+		  ";	
+		  
+	$t = nuRunQuery($s, array($i, $a));
+
+	$r = db_fetch_row($t);
+
+	return $r[0] != 0;        //-- php allowed
 
 }
 
 
 function nuReportAccess($i){
 
-	return true;
+	$a = $GLOBALS['hashData']['nu_access_level'];
+
+	if($a == 'globeadmin'){return true;}
+
+	$s = "SELECT count(*) FROM zzzsys_access_level_report
+		   INNER JOIN zzzsys_access_level ON slr_zzzsys_access_level_id = zzzsys_access_level_id
+		   WHERE slr_zzzsys_report_id = ?
+		   AND sal_code = ?
+		  ";	
+
+	$t = nuRunQuery($s, array($i, $a));
+
+	$r = db_fetch_row($t);
+	
+	return $r[0] != 0;        //-- report allowed
 
 }
 

@@ -95,7 +95,7 @@ function addButtons(buttons){
 		$('#nuActionButtonHolder').append(e);
 		$('#' + e.id).html('&nbsp;');
 
-                var e = document.createElement('input');                           //-- create button
+        var e = document.createElement('input');                           //-- create button
 		e.setAttribute('id', 'nuButton'+i);
 		e.setAttribute('type', 'button');
 		e.setAttribute('value',   ' '+nuTranslate(buttons[i].title)+' ');  //-- add title
@@ -115,115 +115,130 @@ function toggleModalMode(){   //-- login screen
 		var e = document.createElement('div');
 		e.setAttribute('id', 'modal_div');
 		$('body').append(e);
-		$('#' + e.id).css( 'width',  '100%');
-		$('#' + e.id).css( 'height', '100%');
-		$('#' + e.id).css( 'top', '0px');
-		$('#' + e.id).css( 'left', '0px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'filter', 'Alpha(Opacity=20)');
-		$('#' + e.id).css( 'opacity', '0.2');
-		$('#' + e.id).css( 'background-color', '#000000');
+		$('#' + e.id).css({
+            'width'            : '100%',
+            'height'           : '100%',
+            'top'              : '0px',
+            'left'             : '0px',
+            'position'         : 'absolute',
+            'filter'           : 'Alpha(Opacity=20)',
+            'opacity'          : '0.2',
+            'background-color' : '#000000'
+        });
 
-                var e = document.createElement('div');
+        var e = document.createElement('div');
 		e.setAttribute('id', 'userpass1');
 		$('body').append(e);
-		$('#' + e.id).css( 'width',  '310px');
-		$('#' + e.id).css( 'height', '300px');
-		$('#' + e.id).css( 'top', '15%');
-		$('#' + e.id).css( 'left', '35%');
-		$('#' + e.id).css( 'border-style', 'solid');
-		$('#' + e.id).css( 'border-color', 'grey');
-		$('#' + e.id).css( 'border-width', '1px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', 'white');
-		$('#' + e.id).addClass( 'nuShadeHolder');
+		$('#' + e.id).css({
+            'width'            : '310px',
+            'height'           : '300px',
+            'top'              : '15%',
+            'left'             : '35%',
+            'border-style'     : 'solid',
+            'border-color'     : 'grey',
+            'border-width'     : '1px',
+            'position'         : 'absolute',
+            'background-color' : 'white'
+        })
+		.addClass( 'nuShadeHolder');
 
 		var screenSection = e.id;
 
 		var e = document.createElement('span');
 		e.setAttribute('id', 'sptitle');
 		$('#'+ screenSection).append(e);
-		$('#' + e.id).css( 'top', '35px');
-		$('#' + e.id).css( 'left', '5px');
-		$('#' + e.id).css( 'width', '290px');
-		$('#' + e.id).css( 'text-align', 'center');
-		$('#' + e.id).css( 'font-size', '25px');
-		$('#' + e.id).css( 'font-family', 'sans-serif');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', 'white');
-		$('#' + e.id).html('<img src=\'nuBuilder-Logo-medium.png\'/>');
+		$('#' + e.id).css({
+            'top'              : '35px',
+            'left'             : '5px',
+            'width'            : '290px',
+            'text-align'       : 'center',
+            'font-size'        : '25px',
+            'font-family'      : 'sans-serif',
+            'position'         : 'absolute',
+            'background-color' : 'white'
+        })
+		.html('<img src=\'nuBuilder-Logo-medium.png\'/>');
 
 
 		var e = document.createElement('span');
 		e.setAttribute('id', 'dbtitle');
 		$('#'+ screenSection).append(e);
-		$('#' + e.id).css( 'top', '92px');
-		$('#' + e.id).css( 'left', '5px');
-		$('#' + e.id).css( 'width', '290px');
-		$('#' + e.id).css( 'text-align', 'center');
-		$('#' + e.id).css( 'font-size', '15px');
-		$('#' + e.id).css( 'font-family', 'sans-serif');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', 'white');
-		$('#' + e.id).html(nuGetTitle());
+		$('#' + e.id).css({
+            'top'              : '92px',
+            'left'             : '5px',
+            'width'            : '290px',
+            'text-align'       : 'center',
+            'font-size'        : '15px',
+            'font-family'      : 'sans-serif',
+            'position'         : 'absolute',
+            'background-color' : 'white'
+        })
+		.html(nuGetTitle());
 
 		var e = document.createElement('span');
 		e.setAttribute('id', 'sptitlea');
 		$('#'+ screenSection).append(e);
-		$('#' + e.id).css( 'top', '135px');
-		$('#' + e.id).css( 'left', '30px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', 'white');
-		$('#' + e.id).html('Username :');
-		$('#' + e.id).css( 'font-family', 'sans-serif');
-		$('#' + e.id).css( 'font-size', '15px');
-		
+		$('#' + e.id).css({
+            'top'              : '135px',
+            'left'             : '30px',
+            'position'         : 'absolute',
+            'background-color' : 'white',
+            'font-family'      : 'sans-serif',
+            'font-size'        : '15px'
+        })
+		.html('Username :');
+        
 		var e = document.createElement('span');
 		e.setAttribute('id', 'sptitleb');
 		$('#'+ screenSection).append(e);
-		$('#' + e.id).css( 'top', '180px');
-		$('#' + e.id).css( 'left', '30px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', 'white');
-		$('#' + e.id).html('Password :');
-		$('#' + e.id).css( 'font-family', 'sans-serif');
-		$('#' + e.id).css( 'font-size', '15px');
-		
+		$('#' + e.id).css({
+            'top'              : '180px',
+            'left'             : '30px',
+            'position'         : 'absolute',
+            'background-color' : 'white',
+            'font-family'      : 'sans-serif',
+            'font-size'        : '15px'
+        })
+		.html('Password :');
 
 		var e = document.createElement('input');
 		e.setAttribute('id', 'u');
 		e.setAttribute('autocapitalize', 'off');
-                e.setAttribute('autocorrect', 'off');
+        e.setAttribute('autocorrect', 'off');
 		$('#'+ screenSection).append(e);
-		$('#' + e.id).css( 'width',  '150px');
-		$('#' + e.id).css( 'top', '135px');
-		$('#' + e.id).css( 'left', '110px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', 'white');
-		$('#' + e.id).css( 'font-size', '22px');
-		$('#' + e.id).css( 'line-height', '22px');
+		$('#' + e.id).css({
+            'width'            : '150px',
+            'top'              : '135px',
+            'left'             : '110px',
+            'position'         : 'absolute',
+            'background-color' : 'white',
+            'font-size'        : '22px',
+            'line-height'      : '22px'
+        });
 		
 		var e = document.createElement('input');
 		e.setAttribute('id', 'p');
 		e.setAttribute('type', 'password');
 		e.setAttribute('autocapitalize', 'off');
-                e.setAttribute('autocorrect', 'off');
+        e.setAttribute('autocorrect', 'off');
 		$('#'+ screenSection).append(e);
-		$('#' + e.id).css( 'width',  '150px');
-		$('#' + e.id).css( 'top', '180px');
-		$('#' + e.id).css( 'left', '110px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', 'white');
-		$('#' + e.id).css( 'font-size', '22px');
-		$('#' + e.id).css( 'line-height', '22px');
+		
+        $('#' + e.id).css({
+            'width'            : '150px',
+            'top'              : '180px',
+            'left'             : '110px',
+            'position'         : 'absolute',
+            'background-color' : 'white',
+            'font-size'        : '22px',
+            'line-height'      : '22px'
+        })
+            .keypress(function(event) {
                 
-                $('#' + e.id).keypress(function(event) {
-                    
-                    if ( event.which == 13 ) {
-                        nuLogin();
-                    }
-                
-                });
+                if ( event.which == 13 ) {
+                    nuLogin();
+                }
+            
+            });
                 
 		var e = document.createElement('input');
 		e.setAttribute('id', 'log');
@@ -231,17 +246,18 @@ function toggleModalMode(){   //-- login screen
 		e.setAttribute('onclick', 'nuLogin()');
 
 		$('#'+ screenSection).append(e);
-		$('#' + e.id).css( 'width',  '250px');
-		$('#' + e.id).css( 'height',  '35px');
-		$('#' + e.id).css( 'top', '230px');
-		$('#' + e.id).css( 'left', '30px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'background-color', '#D4CEE6');
-		$('#' + e.id).css( 'border-radius', '5px');
-		 $('#' + e.id).css( 'font-size', '22px');
-                $('#' + e.id).css( 'line-height', '22px');
-		
-		$('#' + e.id).val('Login');
+		$('#' + e.id).css({
+            'width'            : '250px',
+            'height'           :  '35px',
+            'top'              : '230px',
+            'left'             : '30px',
+            'position'         : 'absolute',
+            'background-color' : '#D4CEE6',
+            'border-radius'    : '5px',
+            'font-size'        : '22px',
+            'line-height'      : '22px'
+        })
+		.val('Login');
 		
 	}else{
 		$("#modal_div").remove();
@@ -343,17 +359,6 @@ function nuOpenForm(parentFormID, parentRecordID, formID, recordID, formTitle, f
 function nuOpenFormInFrame(formID,recordID,title){
 
 	nuFORM.call_type = 'none';
-/*
-	var request = $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuWindow : nuFORM},
-		dataType : "json",
-		async	 :  false
-		}).done(function(data){
-			nuErrorMessage(data.ERRORS);
-	});
-*/
 	var parent           = '';
 	var w                = new nuWindow();
 	w.call_type          = 'geteditform';
@@ -453,75 +458,85 @@ function nuCustomIframeWindow(url, iframeID, startWidth, startHeight, startTop, 
         var e = document.createElement('div');
         e.setAttribute('id', 'nuModal');
         $('body').append(e);
-        $('#' + e.id).css( 'width',  '100%');
-        $('#' + e.id).css( 'height', '100%');
-        $('#' + e.id).css( 'top', '0px');
-        $('#' + e.id).css( 'left', '0px');
-        $('#' + e.id).css( 'position', 'absolute');
-        $('#' + e.id).css( 'background-color', '#000000');
-        $('#' + e.id).css( 'filter', 'Alpha(Opacity=20)');
-        $('#' + e.id).css( 'opacity', '.2');
+        $('#' + e.id).css({
+            'width'            : '100%',
+            'height'           : '100%',
+            'top'              : '0px',
+            'left'             : '0px',
+            'position'         : 'absolute',
+            'background-color' : '#000000',
+            'filter'           : 'Alpha(Opacity=20)',
+            'opacity'          : '.2'
+        });
 
         var e = document.createElement('div');              //-- create draggable div
         e.setAttribute('id', 'nuDrag');
         $('body').append(e);
-        $('#' + e.id).css( 'width',  sW);
-        $('#' + e.id).css( 'height', sH);
-        $('#' + e.id).css( 'top', sT);//
-        $('#' + e.id).css( 'left', sL);//
-        $('#' + e.id).css( 'position', 'absolute');
-        $('#' + e.id).css( 'background-color', '#E1E8EA');
-        $('#' + e.id).css( 'border-width', '1px');
-        $('#' + e.id).css( 'border-color', '#01A6F5');
-        $('#' + e.id).css( 'border-style', 'solid');
-        $('#' + e.id).css( 'border-radius', '5px');
-        $('#' + e.id).css( 'filter', 'Alpha(Opacity=100)');
-        $('#' + e.id).css( 'opacity', '1');
-        $('#' + e.id).draggable({ handle: 'nuDragBar' });
+        $('#' + e.id).css({
+            'width'            : sW,
+            'height'           : sH,
+            'top'              : sT,
+            'left'             : sL,
+            'position'         : 'absolute',
+            'background-color' : '#E1E8EA',
+            'border-width'     : '1px',
+            'border-color'     : '#01A6F5',
+            'border-style'     : 'solid',
+            'border-radius'    : '5px',
+            'filter'           : 'Alpha(Opacity=100)',
+            'opacity'          : '1'
+        })
+        .draggable({ handle: 'nuDragBar' });
 
-	 var screenSection = 'nuDrag';
+		var screenSection = 'nuDrag';
         var e = document.createElement('div');              //-- create draggable div
         e.setAttribute('id', 'nuDragBar');
         $('#'+ screenSection).append(e);
-        $('#' + e.id).css( 'width',  '20px');
-        $('#' + e.id).css( 'height', '22px');
-        $('#' + e.id).css( 'top', '0px');
-        $('#' + e.id).css( 'left', '0px');
-        $('#' + e.id).css( 'position', 'absolute');
- 	$('#' + e.id).css( 'background-color', '#C0CDD1');
-        $('#' + e.id).css( 'z-index', '1');
-        $('#' + e.id).css( 'border-radius', '5px');
+        $('#' + e.id).css({
+            'width'            : '20px',
+            'height'           : '22px',
+            'top'              : '0px',
+            'left'             : '0px',
+            'position'         : 'absolute',
+            'background-color' : '#C0CDD1',
+            'z-index'          : '1',
+            'border-radius'    : '5px'
+        });
 
         var e = document.createElement('div');              //-- create draggable div
         e.setAttribute('id', 'nuDragBarClose_');
         $('#nuDragBar').append(e);
-        $('#' + e.id).css( 'width',  '20px');
-        $('#' + e.id).css( 'height', '20px');
-        $('#' + e.id).css( 'top', '1px');
-        $('#' + e.id).css( 'left', '0px');
-        $('#' + e.id).css( 'position', 'absolute');
-        $('#' + e.id).css( 'background-color', '#E1E8EA');
-        $('#' + e.id).addClass('nuClose');
-        $('#' + e.id).css( 'z-index', '2');
-        $('#' + e.id).html('&#10006;');
-        $('#' + e.id).mousedown(function() {
+        $('#' + e.id).css({
+            'width'            : '20px',
+            'height'           : '20px',
+            'top'              : '1px',
+            'left'             : '0px',
+            'position'         : 'absolute',
+            'background-color' : '#E1E8EA',
+            'z-index'          : '2'
+        })
+        .addClass('nuClose')
+        .html('&#10006;')
+        .mousedown(function() {
                 $('#nuModal').remove();
                 $('#nuDrag').remove();
         });
 
-	var e = document.createElement('iframe');              //-- create iframe
+		var e = document.createElement('iframe');              //-- create iframe
         e.setAttribute('name', iframe_id);
         e.setAttribute('id', iframe_id);
         e.setAttribute('src', url);
         $('#'+ screenSection).append(e);
-        $('#' + iframe_id).css( 'border-radius', '5px');
-        $('#' + iframe_id).css( 'width',  '100%');
-        $('#' + iframe_id).css( 'height', '100%')
-        $('#' + iframe_id).css( 'top', '0px');
-        $('#' + iframe_id).css( 'left', '0px');
-        $('#' + iframe_id).css( 'position', 'absolute');
+        $('#' + iframe_id).css({
+            'border-radius' : '5px',
+            'width'         : '100%',
+            'height'        : '100%',
+            'top'           : '0px',
+            'left'          : '0px',
+            'position'      : 'absolute'
+        });
 
-}
+	}
 
 function nuOpenNewWindow(w) {
 	w.breadcrumb         = '0';
@@ -535,18 +550,7 @@ function nuOpenNewWindowParent(w) {
 
 function nuOpenLookup(pThis, pFilter){
 
-	nuFORM.call_type = 'none';
-/*
-	var request = $.ajax({
-		url      : "nuapi.php",
-		type     : "POST",
-		data     : {nuWindow : nuFORM},
-		dataType : "json",
-		async	 :  false
-		}).done(function(data){
-			nuErrorMessage(data.ERRORS);
-	});
-*/
+	nuFORM.call_type     = 'none';
 	var parent           = '';
 	var w                = new nuWindow();
     w.parent_form_id     = nuFORM.parent_form_id;
@@ -579,8 +583,8 @@ function nuAddBreadCrumbs(){
 		var e = document.createElement('span');                  //-- create a breadcrumb
 		e.setAttribute('id', 'nuBreadCrumb_'+i);
 		$('#nuBreadCrumbHolder').append(e);
-		$('#'+e.id).html(b[i].title);
-		$('#' + e.id).addClass('nuBreadCrumbSectionEnd');
+		$('#'+e.id).html(b[i].title)
+		.addClass('nuBreadCrumbSectionEnd');
 		if(i+1==b.length){
 			e.setAttribute('title',   'You are here..');
 			e.setAttribute('data-id',   b[i].form_id);
@@ -593,8 +597,8 @@ function nuAddBreadCrumbs(){
 			var e = document.createElement('span');              //-- create an arrow
 			e.setAttribute('id', 'nuArrow_'+i);
 			$('#nuBreadCrumbHolder').append(e);
-			$('#'+e.id).addClass('nuBreadCrumbPointer');
-			$('#'+e.id).html(a);
+			$('#'+e.id).addClass('nuBreadCrumbPointer')
+			.html(a);
 		}
 	
 	}
@@ -901,7 +905,8 @@ function nuRunPHP(pCode, id){
                     if(obj.iframe == 0){
                         window.open(phpUrl);
                     }else{
-                        $('#'+id).attr('src',phpUrl);
+                        setTimeout( function() { $('#'+id).attr('src',phpUrl); },0);
+						
                     }
                     
                 },
@@ -1249,12 +1254,14 @@ function nuMoveObject(id, top, left){
     e.setAttribute('id',   'nu_holder_' + id);
     e.setAttribute('data-nuobject',       objectID);
     $('#' + p).append(e);
-    $('#' + e.id).append(t);
-    $('#' + e.id).css( 'top',    top+'px');
-    $('#' + e.id).css( 'left',   left+'px');
-    $('#' + e.id).css( 'position', 'absolute');
-    $('#' + e.id).css( 'border-style', 'none');
-    $('#' + e.id).addClass('nuSelectedTab');
+    $('#' + e.id).append(t)
+   .css({
+        'top'          : top+'px',
+        'left'         :   left+'px',
+        'position'     : 'absolute',
+        'border-style' : 'none'
+   })
+   .addClass('nuSelectedTab');
 
     $('#' + t.id).append($('#tr_'+id));
 
@@ -1313,9 +1320,9 @@ function nuSavingProgressMessage(){
     var e = document.createElement('div');
     e.setAttribute('id', 'nuProgressSaved');
     $('#nuHolder').append(e);
-    $('#' + e.id).html('<img src=\'ajax-loader.gif\'/>');
-     $('#' + e.id).addClass( 'nuSaveMessageProgress');
-    $('#' + e.id).show();
+    $('#' + e.id).html('<img src=\'ajax-loader.gif\'/>')
+    .addClass( 'nuSaveMessageProgress')
+    .show();
 	$('input[id^="nuButton"]').hide();
 }    
   
@@ -1325,7 +1332,7 @@ function nuSavingMessage(){
     e.setAttribute('id', 'nuNowSaved');
     $('#nuHolder').append(e);
     $('#' + e.id).html('Record Saved')
-    $('#' + e.id).addClass( 'nuSaveMessage');
+    .addClass( 'nuSaveMessage');
     $("#nuNowSaved").fadeToggle(3000);
 } 
 
@@ -1437,9 +1444,10 @@ function nuEmailPDF(pCode, pEmailTo, pAction, pSubject, pMessage, pCallType, pFi
                 if (pEmailTo != '') {
                         EmailTo = pEmailTo;
                 }
-        }
+    }
 
 	nuEmailAttachment(pCode, EmailTo, Action, Subject, Message, CallType, FileName);
+
 }
 
 function nuEmailAttachment(pCode, pEmailTo, pAction, pSubject, pMessage, pCallType, pFileName) {
@@ -1539,5 +1547,33 @@ function nuFormatAjaxErrorMessage(jqXHR, exception) {
         return ('Uncaught Error.\n' + jqXHR.responseText);
     }
 }
+
+
+function nuAjax(pCode, pFunctionName){
+
+		var P       = new nuCopyJSObject(nuFORM);
+        P.form_data = nuGetData();
+        P.phpCode   = pCode;
+		var request = $.ajax({
+		url      : "nuphpjscall.php",
+		type     : "POST",
+		data     : {nuWindow : P},
+		dataType : "json",
+		async	 :  false
+		}).done(function(data){
+		
+		if(nuErrorMessage(data.ERRORS, false)){
+			return;
+		}
+			
+		if(arguments.length == 1){return;}   //-- no js function to run
+
+		window[pFunctionName](data.DATA);
+
+	});
+}
+
+
+
 
 

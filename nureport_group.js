@@ -19,6 +19,14 @@ function nuGroupDialog(reopen){
     $("[id^='nu_group_']").focus(function() {
         nuDisplayGroupProperties(this.id);
     });
+    
+    $("[id^='nu_group_']").blur(function() {
+        for(var i = 1; i < 9; i++ ) {
+            if( $('#nu_group_'+i).val() == '' ) {
+                $('#nu_sort_'+i).val('');
+            }
+        }        
+    });
 
     var ar = Array();
     ar.push('a|Ascending');
@@ -46,7 +54,7 @@ function nuGroupDialog(reopen){
     nuDialogInput('Background Color', 'footer_color', 509, 240);
     nuDialogSelect('Page Break', 'footer_page_break', 531, 240, pb);
 
-    $("#nuProperties > *").change(function() {               //-- all childen on this dialog
+    $("#nuProperties *").change(function() {               //-- all childen on this dialog
         nuSetSectionProperties();
     });
 
@@ -66,9 +74,15 @@ function nuGroupDialog(reopen){
     $('#header_name').css('background-color', '#FFFFFF');
     $('#footer_name').css('background-color', '#FFFFFF');
     
+    //loop through all groups and focus ones with data in the groupField
+    for( var i = 1; i <= 10; i++ ) {
+        if( $('#'+GRP[i].groupField).val() != '' ) {
+            $('#' + GRP[i].groupField).focus();
+        }
+    }
+    
     var g = $('#nu_group_detail').data('group');
     $('#' + GRP[g].groupField).focus();
-
     
 }    
 
@@ -100,7 +114,7 @@ function nuSetCurrentGroup(id){
     function nuSetSectionProperties(){
 
         var g                                    = REPORT.currentGroup;
-        
+      
         if($('#' + GRP[g].groupField).val() == ''){
             
             if(confirm("Are you sure you want to remove this section \nand its objects?")){
@@ -161,6 +175,12 @@ function nuSetCurrentGroup(id){
             REPORT.groups[g].sections[1].height     = $('#footer_height').val();
             REPORT.groups[g].sections[1].color      = $('#footer_color').val();
             REPORT.groups[g].sections[1].label      = $('#' + GRP[g].groupField).val() + ' Footer';
+        }
+        
+        for(var idx = 3; idx < REPORT.groups.length; idx++ ) {
+            if( $('#' + GRP[idx].groupField).val() != '' ) {
+                REPORT.groups[idx].sortBy           = $('#' + GRP[idx].groupSort).val();
+            }
         }
         
         nuBuildGroupFromREPORT(g);
@@ -281,10 +301,18 @@ function nuDialogButtons(){
 
         var grp = [];
         grp     = REPORT.groups.splice(REPORT.currentGroup, 1);
-        REPORT.groups.splice(REPORT.currentGroup - 1, 0, grp[0])
+        REPORT.groups.splice(REPORT.currentGroup - 1, 0, grp[0]);
 
         nuDisplayGroupProperties(GRP[REPORT.currentGroup].groupField);
-        nuDisplayGroupProperties(GRP[REPORT.currentGroup - 1].groupField);
+        nuDisplayGroupProperties(GRP[REPORT.currentGroup - 1].groupField);    
+        
+        for( var idx = 1; idx < 9; idx++ ) {
+            var groupBy = $('#nu_group_'+idx).val();
+            if( groupBy == '' ) {
+                $('#nu_sort_'+idx).val('');
+            }
+        }
+        
         nuSortSections();
         nuMoveAllObjects();
         nuReadjustSections();
@@ -311,8 +339,16 @@ function nuDialogButtons(){
         REPORT.groups.splice(REPORT.currentGroup + 1 , 0, grp[0])
 
 
-        nuDisplayGroupProperties(GRP[REPORT.currentGroup + 1].groupField);
         nuDisplayGroupProperties(GRP[REPORT.currentGroup].groupField);
+        nuDisplayGroupProperties(GRP[REPORT.currentGroup + 1].groupField);
+
+        for( var idx = 1; idx < 9; idx++ ) {
+            var groupBy = $('#nu_group_'+idx).val();
+            if( groupBy == '' ) {
+                $('#nu_sort_'+idx).val('');
+            }
+        }
+        
         nuSortSections();
         nuMoveAllObjects();
         nuReadjustSections();

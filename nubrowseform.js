@@ -23,12 +23,16 @@ function nuBuildBrowseForm(o){
 	var h               = width_height.split('_')[1];
         
 	$('.nuActionButtonHolder').css('width',  width_height.split('_')[0] + 'px');
-	$('.nuHolder').css('width',  w + 'px');
-	$('.nuHolder').css('height', h + 'px');
+	$('.nuHolder').css({
+        'width'  : w + 'px',
+        'height' : h + 'px'
+    });
 	nuHighlightSearch(o);
 	if(nuFORM.edit_browse == 'true'){                            //-- adjust dimemsions of nuHolder inside iFrame
-		$('.nuHolder').css('position', 'absolute');
-		$('.nuHolder').css('margin', '0px');
+        $('.nuHolder').css({
+            'position' : 'absolute',
+            'margin'   : '0px'
+        });
 	}else{
 		nuAddBreadCrumbs();
 	}
@@ -106,8 +110,8 @@ function nuBuildBrowsePage(o){
 	e.setAttribute('id', 'nuSearchField');
 	e.setAttribute('value', o.search);
 	$('#nuActionButtonHolder').append(e);
-	$('#' + e.id).css( 'width', '200px');
-	$('#' + e.id).addClass('nuSearch');
+	$('#' + e.id).css('width', '200px')
+	.addClass('nuSearch');
 	e.setAttribute('onkeypress', 'nuSearchPressed(event)');
 	
 	var e = document.createElement('span');               //-- create space
@@ -144,15 +148,16 @@ function addBrowseTitles(o){
         var e = document.createElement('div');               //-- column title
 		e.setAttribute('id', 'title_'+cID);
 		$('#nuTabTitleHolder').append(e);
-		$('#' + e.id).css( 'top',    '0px');
-		$('#' + e.id).css( 'left',  l+'px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'width', w+'px');
-		$('#' + e.id).css( 'height','60px');
-		$('#' + e.id).css( 'text-align', 'center');
-                
-		$('#' + e.id).css( 'border-style', 'solid');
-		$('#' + e.id).css( 'border-color', 'grey');
+		$('#' + e.id).css({ 
+            'top'          : '0px',
+            'left'         :  l+'px',
+            'position'     : 'absolute',
+            'width'        : w+'px',
+            'height'       : '60px',
+            'text-align'   : 'center',
+            'border-style' : 'solid',
+            'border-color' : 'grey'
+		 });
                 
 		if(i == 1){
 			$('#' + e.id).addClass('nuTabTitleHolderL nuUnselectedTab nuGradient');
@@ -173,8 +178,10 @@ function addBrowseTitles(o){
 			}else{
 				$('#' + e.id).html('&#x25BC;');
 			}
-			$('#' + e.id).css('color', '#96ABB8');
-			$('#' + e.id).css('height', '60px');
+			$('#' + e.id).css({
+                'color'  : '#96ABB8',
+                'height' : '60px'
+            });
 		}
 		
 		var e = document.createElement('input');                 //-- Search Toggle
@@ -187,13 +194,13 @@ function addBrowseTitles(o){
             $('#' + e.id).attr('checked','checked');
         }
                 
-		$('#' + e.id).addClass('nuSearchColumn');
-		$('#' + e.id).css( 'margin',    '3px 0px 0px 0px');
-                $('#' + e.id).dblclick(
-                        function (){
-                            nuCheckAllBoxes(this);
-                        }
-                );
+		$('#' + e.id).addClass('nuSearchColumn')
+		.css( 'margin' , '3px 0px 0px 0px')
+        .dblclick(
+                function (){
+                    nuCheckAllBoxes(this);
+                }
+        );
         
 		var e = document.createElement('br');
 		$('#title_'+cID).append(e);
@@ -201,8 +208,8 @@ function addBrowseTitles(o){
 		e.setAttribute('id', 'nusort_'+i);
 		e.setAttribute('onclick', 'nuSortBrowse('+(i+1)+')');
 		$('#title_'+cID).append(e);
-		$('#' + e.id).html(' '+t+' ');
-		$('#' + e.id).hover(
+		$('#' + e.id).html(' '+t+' ')
+		.hover(
 				function (){
 						$('#' + this.id).css('color', 'red');
 				}, 
@@ -222,9 +229,11 @@ function addBrowseTitles(o){
 	}
 
 	$('#nuShadeHolder').css('width', l+'px');
-	$('#nuTabTitleHolder').css('width', l+'px');
-	$('#nuTabTitleHolder').css('height', '60px');
-	$('#nuTabTitleHolder').css( 'overflow', 'hidden');
+	$('#nuTabTitleHolder').css({
+        'width'    : l+'px',
+        'height'   : '60px',
+        'overflow' : 'hidden'
+    });
 
 }
 
@@ -312,12 +321,14 @@ function addBrowseRows(o){
 		var e = document.createElement('div');                 //-- row
 		e.setAttribute('id', 'row_'+rw);
 		$('#nuBrowseTabAreaHolder').append(e);
-		$('#' + e.id).css( 'top', top+'px');
-		$('#' + e.id).css( 'left',  l+'px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'height',rowHeight+'px');
-		$('#' + e.id).css( 'width', '0px');
-		$('#' + e.id).addClass('nuSelectedTab');
+		$('#' + e.id).css({
+            'top'      : top+'px',
+            'left'     : l+'px',
+            'position' : 'absolute',
+            'height'   : rowHeight+'px',
+            'width'    : '0px'
+        })
+		.addClass('nuSelectedTab');
 		p = e.id;
 
 		for(var i   = 1 ; i < o.objects.length ; i++){
@@ -329,16 +340,18 @@ function addBrowseRows(o){
             var cID  = i - 1;                                      //-- column number
 			e.setAttribute('id', 'row_'+rw+'_col_'+cID);
 			$('#'+p).append(e);
-			$('#' + e.id).css( 'top', '0px');
-			$('#' + e.id).css( 'left',  l+'px');
-			$('#' + e.id).css( 'position', 'absolute');
-			$('#' + e.id).css( 'height',rowHeight+'px');
-			$('#' + e.id).css( 'width', w+'px');
-			$('#' + e.id).css( 'text-align', nuFormatAlign(a));
-			$('#' + e.id).css( 'overflow', 'hidden');
-			$('#' + e.id).html(v);
-			$('#' + e.id).addClass('nuSelectedTab nuBrowseCell');
-			$('#' + e.id).hover(
+			$('#' + e.id).css({
+                'top'        : '0px',
+                'left'       : l+'px',
+                'position'   : 'absolute',
+                'height'     : rowHeight+'px',
+                'width'      : w+'px',
+                'text-align' : nuFormatAlign(a),
+                'overflow'   : 'hidden'
+            })
+			.html(v)
+			.addClass('nuSelectedTab nuBrowseCell')
+			.hover(
 				function (){
 					nuBrowseHighlight(this,'in');
 				}, 
@@ -369,12 +382,14 @@ function addBrowseRows(o){
 			
 		}
 		top = top+Number(rowHeight);
-		$('#'+p).css('width', l+'px');
-		$('#'+p).css( 'overflow', 'hidden');
-		$('#'+p).attr( 'data-primary-key',    o.records[r][0]);
-		$('#'+p).attr( 'data-open-form',      o.openform[r]);
-		$('#'+p).attr( 'data-parent-form',    o.parentform);
-		$('#'+p).attr( 'data-parent-record',  o.parentrecord[r]);
+		$('#'+p).css({
+            'width'    : l+'px',
+            'overflow' : 'hidden'
+        })
+		.attr( 'data-primary-key',    o.records[r][0])
+		.attr( 'data-open-form',      o.openform[r])
+		.attr( 'data-parent-form',    o.parentform)
+		.attr( 'data-parent-record',  o.parentrecord[r]);
                 
 	}
 	
@@ -387,11 +402,13 @@ function addBrowseRows(o){
 		var e = document.createElement('div');                 //-- row
 		e.setAttribute('id', 'row_'+rw);
 		$('#nuBrowseTabAreaHolder').append(e);
-		$('#' + e.id).css( 'top', top+'px');
-		$('#' + e.id).css( 'left',  l+'px');
-		$('#' + e.id).css( 'position', 'absolute');
-		$('#' + e.id).css( 'height',rowHeight+'px');
-		$('#' + e.id).css( 'width', '0px');
+		$('#' + e.id).css({
+            'top'      : top+'px',
+            'left'     : l+'px',
+            'position' : 'absolute',
+            'height'   : rowHeight+'px',
+            'width'    : '0px'
+        });
 		if(firstRow){
 			$('#' + e.id).css( 'border-style', 'solid none none none');
 		}else{
@@ -407,21 +424,25 @@ function addBrowseRows(o){
 			var e = document.createElement('div');              //-- row column
 			e.setAttribute('id', 'row_'+rw+'_col_'+cID);
 			$('#'+p).append(e);
-			$('#' + e.id).css( 'top', '0px');
-			$('#' + e.id).css( 'left',  l+'px');
-			$('#' + e.id).css( 'position', 'absolute');
-			$('#' + e.id).css( 'height',rowHeight+'px');
-			$('#' + e.id).css( 'width', w+'px');
-			$('#' + e.id).css( 'text-align', nuFormatAlign(a));
-			$('#' + e.id).css( 'border-style', 'none');
-			$('#' + e.id).addClass('nuSelectedTab');
+			$('#' + e.id).css({
+                'top'          : '0px',
+                'left'         : l+'px',
+                'position'     : 'absolute',
+                'height'       : rowHeight+'px',
+                'width'        : w+'px',
+                'text-align'   : nuFormatAlign(a),
+                'border-style' : 'none' 
+            })
+			.addClass('nuSelectedTab');
 			l = Number(l) + Number(w);
 			
 		}
 		top = top+Number(rowHeight);
-		$('#'+p).css('width', l+'px');
 		$('#nuHolder').css('width', l+'px');
-		$('#'+p).css( 'overflow', 'hidden');
+		$('#'+p).css({
+            'overflow' : 'hidden',
+            'width'    : l+'px'
+        });
 		firstRow = false;
 	}
 	
@@ -429,13 +450,15 @@ function addBrowseRows(o){
 	e.setAttribute('id', 'nuStatusHolder');
 	$('#nuShadeHolder').css('height', (82+top)+'px');
 	$('#nuBrowseTabAreaHolder').append(e);
-	$('#nuStatusHolder').css('width', l+'px');
-	$('#nuStatusHolder').css('top', top+'px');
-	$('#nuStatusHolder').css('left', '0px');
-	$('#nuStatusHolder').css('position', 'absolute');
-	$('#nuStatusHolder').addClass('nuStatusHolder nuUnselectedTab nuGradient');
-	$('#nuStatusHolder').css( 'font-size', '12px');
-	$('#nuStatusHolder').css( 'padding', '4px 0px 0px 0px');
+	$('#nuStatusHolder').css({
+        'width'     : l+'px',
+        'top'       : top+'px',
+        'left'      : '0px',
+        'position'  : 'absolute',
+        'font-size' : '12px',
+        'padding'   : '4px 0px 0px 0px'
+    })
+    .addClass('nuStatusHolder nuUnselectedTab nuGradient');
 	if (window.top === window.self) {
         if(nuGetID() == ''){
             $('#nuStatusHolder').html('&nbsp;<a style="text-decoration:none;padding:3px 0px 0px 0px" href="'+nuGetHome()+'">'+nuTranslate('Logout')+'</a>');
@@ -508,23 +531,27 @@ function nuPagingStatus(parent,top,left,page,total){
 	var e = document.createElement('div');              //-- create a new paging object
 	e.setAttribute('id', 'paging_'+parent);
 	$('#' + parent).append(e);
-	$('#' + e.id).css( 'width', '190px');
-	$('#' + e.id).css( 'height', '22px');
-	$('#' + e.id).css( 'text-align', 'right');
-	$('#' + e.id).css( 'top', '0px');
-	$('#' + e.id).css( 'left', left+'px');
-	$('#' + e.id).addClass('nuUnselectedTab nuGradient');
+	$('#' + e.id).css({
+        'width'      : '190px',
+        'height'     : '22px',
+        'text-align' : 'right',
+        'top'        : '0px',
+        'left'       : left+'px'
+    })
+	.addClass('nuUnselectedTab nuGradient');
 
 	var lt = document.createElement('div');              //-- create a less than object
 	lt.setAttribute('id', 'paging_previous_'+parent);
 	$('#' + e.id).append(lt);
-	$('#' + lt.id).css( 'top', '0px');
-	$('#' + lt.id).css( 'padding', '3px 0px 0px 0px');
-	$('#' + lt.id).css( 'left', '15px');
-	$('#' + lt.id).css( 'position', 'absolute');
-	$('#' + lt.id).css( 'font-weight', 'bold');
-	$('#' + lt.id).css( 'font-size', '12px');
-	$('#' + lt.id).html('&#9668;');
+	$('#' + lt.id).css({
+        'top'         : '0px',
+        'padding'     : '3px 0px 0px 0px',
+        'left'        : '15px',
+        'position'    : 'absolute',
+        'font-weight' : 'bold',
+        'font-size'   : '12px'
+     })
+	.html('&#9668;');
 	if(page != 1){
 		p = page - 1;
 		$('#' + lt.id).css('cursor', 'pointer');
@@ -535,56 +562,64 @@ function nuPagingStatus(parent,top,left,page,total){
 	var ltt = document.createElement('div');              //-- create a less than text object
 	ltt.setAttribute('id', 'paging_previous_text_'+parent);
 	$('#' + e.id).append(ltt);
-	$('#' + ltt.id).css( 'top', '0px');
-	$('#' + ltt.id).css( 'padding', '3px 0px 0px 0px');
-	$('#' + ltt.id).css( 'left', '30px');
-	$('#' + ltt.id).css( 'position', 'absolute');
-	$('#' + ltt.id).css( 'font-size', '12px');
-	$('#' + ltt.id).html(nuTranslate('Page'));
-	$('#' + ltt.id).addClass('nuUnselectedTab nuGradient');
+	$('#' + ltt.id).css({
+        'top'       : '0px',
+        'padding'   : '3px 0px 0px 0px',
+        'left'      : '30px',
+        'position'  : 'absolute',
+        'font-size' : '12px'
+    })
+	.html(nuTranslate('Page'))
+	.addClass('nuUnselectedTab nuGradient');
 
 	var ip = document.createElement('input');              //-- create a current page object
 	ip.setAttribute('id', 'paging_current_'+parent);
 	$('#' + e.id).append(ip);
-	$('#' + ip.id).css( 'height', '12px');
-	$('#' + ip.id).css( 'top', '3px');
-	$('#' + ip.id).css( 'left', '70px');
-	$('#' + ip.id).css( 'position', 'absolute');
-	$('#' + ip.id).css( 'width', '30px');
-	$('#' + ip.id).css( 'font-size', '12px');
-	$('#' + ip.id).val(page);
-	$('#' + ip.id).css( 'text-align', 'center');
-	$('#' + ip.id).css( 'background-color', 'white');
+	$('#' + ip.id).css({
+        'height'           : '12px',
+        'top'              : '3px',
+        'left'             : '70px',
+        'position'         : 'absolute',
+        'width'            : '30px',
+        'font-size'        : '12px',
+        'text-align'       : 'center',
+        'background-color' : 'white'
+    })
+	.val(page);
 	ip.setAttribute('onchange', 'nuGotoPage(this.value, ' + total + ')');
 
 	var gtt = document.createElement('div');              //-- create a greater than text object
 	gtt.setAttribute('id', 'paging_next_text'+parent);
 	$('#' + e.id).append(gtt);
-	$('#' + gtt.id).css( 'top', '0px');
-	$('#' + gtt.id).css( 'padding', '3px 0px 0px 0px');
-	$('#' + gtt.id).css( 'left', '110px');
-	$('#' + gtt.id).css( 'position', 'absolute');
-	$('#' + gtt.id).css( 'font-size', '12px');
-	$('#' + gtt.id).html('/&nbsp;'+ Math.max(total,1));
-	$('#' + gtt.id).addClass('nuUnselectedTab nuGradient');
+	$('#' + gtt.id).css({
+        'top'       : '0px',
+        'padding'   : '3px 0px 0px 0px',
+        'left'      : '110px',
+        'position'  : 'absolute',
+        'font-size' : '12px'
+    })
+	.html('/&nbsp;'+ Math.max(total,1))
+	.addClass('nuUnselectedTab nuGradient');
         
-        var swidth = 10 + (String(total).length * 10);
-        var gt = document.createElement('span');              //-- create a greater than object
+    var swidth = 10 + (String(total).length * 10);
+    var gt = document.createElement('span');              //-- create a greater than object
 	gt.setAttribute('id', 'paging_next_'+parent);
 	$('#' + gtt.id).append(gt);
-	$('#' + gt.id).css( 'top', '0px');
-	$('#' + gt.id).css( 'padding', '3px 0px 0px 0px');
-	$('#' + gt.id).css( 'left', swidth + 'px');
-	$('#' + gt.id).css( 'position', 'absolute');
-	$('#' + gt.id).css( 'font-weight', 'bold');
-	$('#' + gt.id).css( 'font-size', '12px');
-	$('#' + gt.id).html('&#9658;');
+	$('#' + gt.id).css({ 
+        'top'         : '0px',
+        'padding'     : '3px 0px 0px 0px',
+        'left'        : swidth + 'px',
+        'position'    : 'absolute',
+        'font-weight' : 'bold',
+        'font-size'   : '12px'
+    })
+	.html('&#9658;');
 
-        if(page != total){
+    if(page != total){
 		p = Number(page) + 1;
 		$('#' + gt.id).css('cursor', 'pointer');
 		gt.setAttribute('onclick', 'nuGotoPage(' + p + ', ' + total + ')');
-	}	
+	}
 	$('#' + gt.id).addClass('nuUnselectedTab nuGradient');
 
 	

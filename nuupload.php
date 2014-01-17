@@ -2,31 +2,41 @@
 
 require_once('nucommon.php'); 
 
-$uploaddir = 'tmp/';
-$uploadfile = $uploaddir . basename($_FILES['userfile']['name']);
+$uploaddir      = 'tmp/';
+$dq             = '"';
+$J              = array();
 
-if(move_uploaded_file($_FILES['userfile']['tmp_name'], $uploadfile)){
-  $status = "File uploaded ready for saving..\n";
-}else{
-   $status = "Upload failed";
+foreach ($_FILES as $key){                          //-- loop through uploaded files
+
+	$uploadfile = $uploaddir . basename($key['name']);
+
+	if(move_uploaded_file($key['tmp_name'], $uploadfile)){
+	   $status = "File uploaded ready for saving..\n";
+	}else{
+	   $status = "Upload failed";
+	}
+
+	$name      = $key['name'];
+	$type      = $key['type'];
+	$error     = $key['error'];
+	$size      = $key['size'];
+
+	$J[]       = " { |name| : |$name|,  |type| : |$type|,  |error| : |$error|,  |size| : |$size| }" ;
+
 }
 
-$name     = $_FILES['userfile']['name'];
-$type     = $_FILES['userfile']['type'];
-$tmp_name = $_FILES['userfile']['tmp_name'];
-$size     = $_FILES['userfile']['size'];
+$JSON          = '[ ' . implode(', ', str_replace('|', '"', $J)) . ' ]';
 
-$scr = "
+
+$scr           = "
 
 <script>
 
 function nuloadstats(){
 
-    parent.document.getElementById('sfi_tmp_name').value = '$tmp_name';
-	parent.document.getElementById('sfi_name').value = '$name';
-	parent.document.getElementById('sfi_type').value = '$type';
-	parent.document.getElementById('sfi_size').value = '$size';
+	parent.nuFORM.FILES = '$JSON';
 	parent.nuSetEdited();
+	
 }
 
 </script>
@@ -36,4 +46,5 @@ function nuloadstats(){
 ";
 
 print $scr;
+
 ?> 

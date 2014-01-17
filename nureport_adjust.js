@@ -346,6 +346,7 @@ function nuEvenHorizontal(){
     idmin = "";
     idmax = "";
     space = 0;
+    var width_sum = 0;
     // Calculate the space
     for(var  g = 0 ; g < REPORT.groups.length ; g ++){    
         for(var  s = 0 ; s < REPORT.groups[g].sections.length ; s ++){
@@ -354,6 +355,7 @@ function nuEvenHorizontal(){
                     id = REPORT.groups[g].sections[s].objects[o].id;
                     l = parseInt($('#' + id).css('left'));
                     onum++;
+                    width_sum += parseInt($('#' + id).css('width'));
                     if (onum == 1) {
                         lmin = l;
                         lmax = l;
@@ -373,20 +375,32 @@ function nuEvenHorizontal(){
             }
         }
     }
+    width_sum -= parseInt($('#' + idmax).css('width'));
 
     if (onum > 2) {
-        space = (lmax - lmin)/(onum -1);
+        space = ((lmax - lmin) - width_sum)/(onum -1);
+    }
+    
+    if(space < 0 ) {
+        return;
     }
     // Adjust the value of left property.
     onum = 0;
+    var prev_id = idmin;
+    var prev_l = lmin;
+    var prev_w = 0;
     for(var  g = 0 ; g < REPORT.groups.length ; g ++){
         for(var  s = 0 ; s < REPORT.groups[g].sections.length ; s ++){
             for(var  o = 0 ; o < REPORT.groups[g].sections[s].objects.length ; o ++){
                 if(REPORT.groups[g].sections[s].objects[o].selected == 1){
                     id = REPORT.groups[g].sections[s].objects[o].id;
+                    prev_l = parseInt($('#' + prev_id).css('left'));
+                    prev_w = parseInt($('#' + prev_id).css('width'));
                     if (id != idmin && id != idmax) {
                         onum++;
-                        $('#' + id).css('left', lmin + space*onum);
+                        $('#' + id).css('left', (prev_l+prev_w) + space);
+                        nuSetObjectValue(id, 'left', parseInt($('#'+id).css('left'))-30);
+                        prev_id = id;
                     }
                 }
             }

@@ -14,7 +14,7 @@ $GLOBALS['EXTRAJS'] = '';
 nuGetFormProperties(nuV('form_id'));
 $hashData = nuHashData();
 $GLOBALS['hashData'] = $hashData;
-nudebug(print_r($hashData,1));
+//nudebug(print_r($hashData,1));
 //$GLOBALS['nu_POST'] = nuHashArray(nuV('form_data'));
 
 //==============================================================================
@@ -2070,8 +2070,8 @@ function nuGetObjectButton($o, $recordID, $hashData) {
         $f = db_fetch_object($t);
         $nuObject->form_title = $f->sfo_title;
     }
-        
-    $nuObject->record_id = $o->sob_button_skip_browse_record_id;
+
+    $nuObject->record_id =  nuReplaceHashes($o->sob_button_skip_browse_record_id, $hashData);//--  $o->sob_button_skip_browse_record_id;
 
     return $nuObject;
 }

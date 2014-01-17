@@ -1050,6 +1050,10 @@ function nuCreateDialog(w, h, title){
             if(!nuReportPropertiesOK()){return;}
         }
         
+        $("[id^='property_']").each(function(n) {                       //-- move selected
+            $('#property_'+n).trigger("change");
+        });
+        
         $('#nuDrag').remove();
         
     }
@@ -1129,7 +1133,6 @@ function nuGetObjectValue(o,p){          //-- object, property
 function nuSetObjectValue(o,p,v){        //-- object, property, value
 
     var O  = nuGetObjectFamilyTree(o);   // -- returns [group, section, object]
-    
     REPORT.groups[O[0]].sections[O[1]].objects[O[2]][p] = v;
 
 }
